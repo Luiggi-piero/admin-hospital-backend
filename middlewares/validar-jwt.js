@@ -17,6 +17,7 @@ const validarJWT = (req, res = response, next) => {
   try {
     const { uid } = jwt.verify(token, process.env.JWT_SECRET);
     // Agregar infrormacion a 'req' para que lo reciba el controlador
+    // El uid es el identificador del usuario dueño el token
     req.uid = uid;
 
     next();

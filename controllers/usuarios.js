@@ -136,5 +136,3 @@ module.exports = {
   actualizarUsuario,
   borrarUsuario,
 };
-
-// 3:00
