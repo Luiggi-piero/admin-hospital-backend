@@ -5,12 +5,27 @@ const { generarJwt } = require("../helpers/jwt");
 const Usuario = require("../models/usuario");
 
 const getUsuarios = async (request, response) => {
-  const usuarios = await Usuario.find({}, "nombre email google role");
+  const desde = Number(request.query.desde) || 0;
+
   // const usuarios = await Usuario.find(); // Obtiene todo sin filtrar
+
+  // Se ejecutan uno despues del otro
+  // const usuarios = await Usuario.find({}, "nombre email google role")
+  //   .skip(desde)
+  //   .limit(5);
+
+  // const total = await Usuario.count();
+
+  // Se ejecutan de manera simultánea y los resultados se mantienen en la desestructuración
+  const [usuarios, total] = await Promise.all([
+    Usuario.find({}, "nombre email google role").skip(desde).limit(5),
+    Usuario.count(),
+  ]);
 
   response.json({
     ok: true,
     usuarios,
+    total,
   });
 };
 
