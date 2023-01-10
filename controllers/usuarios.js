@@ -18,7 +18,7 @@ const getUsuarios = async (request, response) => {
 
   // Se ejecutan de manera simultánea y los resultados se mantienen en la desestructuración
   const [usuarios, total] = await Promise.all([
-    Usuario.find({}, "nombre email google role").skip(desde).limit(5),
+    Usuario.find({}, "nombre email google role img").skip(desde).limit(5),
     Usuario.count(),
   ]);
 
