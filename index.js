@@ -11,6 +11,9 @@ const app = express();
 // Configurar cors (para que el cliente se pueda conectar con el servidor)
 app.use(cors());
 
+// Carpeta publica (sirve archivos estaticos)
+app.use(express.static('public'));
+
 // Lectura y parseo del body(express recibe la información del body)(usa un middleware)
 app.use(express.json())
 
