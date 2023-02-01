@@ -9,7 +9,7 @@ const MedicoSchema = Schema({
     img:{
         type: String,
     },
-    // El schema hospital esta relacionado con el schema Usuario 
+    // El schema medico esta relacionado con el schema Usuario  y hospital
     usuario:{
         type: Schema.Types.ObjectId,
         ref: 'Usuario',

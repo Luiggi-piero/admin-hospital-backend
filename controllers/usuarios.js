@@ -98,7 +98,16 @@ const actualizarUsuario = async (req, res = response) => {
       }
     }
 
-    campos.email = email;
+    if(!usuarioDB.google){
+      campos.email = email;
+    }else if( usuarioDB.email !== email){
+      return res.status(400).json({
+        ok: false,
+        msg: 'Usuario de Google no puede modificar su email'
+      })
+    }
+
+
     const usuarioActualizado = await Usuario.findByIdAndUpdate(uid, campos, {
       new: true,
     });
@@ -140,7 +149,7 @@ const borrarUsuario = async (req, res = response) => {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: "Algo salio mal al borrar",
+      msg: "Algo salió mal al borrar",
     });
   }
 };
