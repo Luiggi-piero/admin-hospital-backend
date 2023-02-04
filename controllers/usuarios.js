@@ -1,6 +1,7 @@
 const { response } = require("express");
 const bcrypt = require("bcryptjs");
 const { generarJwt } = require("../helpers/jwt");
+const { getMenuFrontEnd } = require("../helpers/menu-frontend");
 
 const Usuario = require("../models/usuario");
 
@@ -62,6 +63,7 @@ const crearUsuario = async (request, res = response) => {
       ok: true,
       usuario,
       token,
+      menu: getMenuFrontEnd(usuario.role)
     });
   } catch (error) {
     console.log(error);
